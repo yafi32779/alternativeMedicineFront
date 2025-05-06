@@ -1,0 +1,34 @@
+.hours{
+
+    font-size: 20px;
+    color: black;
+    font-size: small;
+    padding: 1px;
+    /* border-bottom: black solid 0.3px; */
+    border-radius: 0px;
+    /* border: rgba(95, 95, 95, 0.475) 2px solid ; */
+    display: flex;
+/* color:rgba(134, 165, 134, 0.228); */
+}
+
+.hours:hover{
+    color: red !important;
+}
+#turnDitailsOfEmpday{
+    height: 35vh;
+}
+#buttonToCancal{
+    width: 100%;
+}
+#divToTimeDitails{
+    text-align: center;
+}
+.h3ToDialogDitails{
+    text-align: center;
+}
+.divToButtonForTurns{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+ margin-top: 20%;
+}

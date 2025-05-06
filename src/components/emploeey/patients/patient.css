@@ -1,0 +1,18 @@
+
+#table{
+    border: black solid 2px;
+}
+
+td{
+    border: black solid 2px;
+    padding: 10px;
+}
+
+th{
+    font-size: large;
+}
+
+#body{
+    display: flex;
+    justify-content: space-around;
+}

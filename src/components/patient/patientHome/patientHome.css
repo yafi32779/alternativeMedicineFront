@@ -1,0 +1,301 @@
+/* משתני צבע בסגנון ירוק ועץ */
+:root {
+    --primary-green: #4a7c59;
+    --light-green: #8fb996;
+    --dark-green: #2c5530;
+    --wood-brown: #a68a64;
+    --light-wood: #d8c3a5;
+    --cream: #f8f4e3;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+  }
+  
+  /* סגנון כללי */
+  .patient-home {
+    font-family: 'Heebo', Arial, sans-serif;
+    direction: rtl;
+    background-color: var(--cream);
+    color: var(--text-dark);
+  }
+  
+  /* באנר כותרת */
+  .header-banner {
+    background-image: linear-gradient(rgba(44, 85, 48, 0.7), rgba(44, 85, 48, 0.7)), url('../../../../public/images/טיפול-טבעי-בחרדה_1732450075867-930x620.webp');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+  }
+  
+  .header-content {
+    max-width: 800px;
+    padding: 0 20px;
+  }
+  
+  .header-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .header-content p {
+    font-size: 1.2rem;
+  }
+  
+  /* סרגל ניווט */
+  .clinic-toolbar {
+    background-color: var(--light-wood);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-greeting h3 {
+    color: var(--dark-green);
+    font-weight: 500;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 25px;
+  }
+  
+  .nav-link {
+    color: var(--dark-green);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: var(--primary-green);
+    color: var(--text-light);
+  }
+  
+  .nav-link.active {
+    background-color: var(--primary-green);
+    color: var(--text-light);
+  }
+  
+  /* אזור מבוא */
+  .clinic-intro {
+    display: flex;
+    padding: 60px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    align-items: center;
+  }
+  
+  .intro-content {
+    flex: 1;
+  }
+  
+  .intro-content h2 {
+    color: var(--dark-green);
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .intro-content p {
+    line-height: 1.6;
+  }
+  
+  .intro-image {
+    flex: 1;
+  }
+  
+  .intro-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* אזור טיפולים */
+  .treatments-section {
+    background-color: var(--light-green);
+    padding: 60px 30px;
+    text-align: center;
+  }
+  
+  .treatments-section h2 {
+    color: var(--text-light);
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  
+  .treatments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .treatment-card {
+    background-color: var(--text-light);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .treatment-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .treatment-card h3 {
+    color: var(--dark-green);
+    margin-bottom: 15px;
+  }
+  
+  .treatment-card p {
+    margin-bottom: 20px;
+    color: var(--text-dark);
+  }
+  
+  .book-btn {
+    background-color: var(--primary-green);
+    color: var(--text-light);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .book-btn:hover {
+    background-color: var(--dark-green);
+  }
+  
+  /* אזור יתרונות */
+  .benefits-section {
+    padding: 60px 30px;
+    background-color: var(--wood-brown);
+    color: var(--text-light);
+    text-align: center;
+  }
+  
+  .benefits-section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  
+  .benefits-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .benefit-item {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  
+  .benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  
+  .benefit-item h3 {
+    margin-bottom: 15px;
+    color: var(--text-light);
+  }
+  
+  /* אזור תוכן */
+  .content-section {
+    min-height: 500px;
+    padding: 40px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* פוטר */
+  .clinic-footer {
+    background-color: var(--dark-green);
+    color: var(--text-light);
+    padding: 40px 30px 20px;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+  }
+  
+  .contact-info, .hours {
+    min-width: 250px;
+  }
+  
+  .footer-content h3 {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+  
+  .copyright {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* רספונסיביות */
+  @media (max-width: 768px) {
+    .clinic-intro {
+      flex-direction: column;
+    }
+    
+    .nav-links {
+      gap: 15px;
+    }
+    
+    .benefits-container {
+      gap: 20px;
+    }
+    
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header-content h1 {
+      font-size: 2rem;
+    }
+    
+    .clinic-toolbar {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .nav-links {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+  
+  

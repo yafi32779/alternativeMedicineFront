@@ -1,0 +1,21 @@
+
+#titleDialog{
+    width: 300px;
+    display: flex;
+    margin-top: 40px;
+    font-size: xx-large;
+}
+p{
+    width: 100%;
+}
+#turnDitails{
+    direction: rtl;
+    margin: 15px;
+    /* margin-right: 25px; */
+    text-align: center;
+}
+.submitForWeek{
+    width: 50%;
+    text-align: center;
+
+}

@@ -1,0 +1,12 @@
+
+#calen{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.buttonsToMoveInCalander{
+    height: 35px;
+    font-size: 15px;
+    text-align: center;
+    margin: 7px;
+}
