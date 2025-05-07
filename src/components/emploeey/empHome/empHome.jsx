@@ -3,16 +3,16 @@ import { useSelector } from "react-redux";
 import { Patients } from "../patients/patients";
 import CalendarEmp from "../calanderEmp/calenderEmp";
 import { LogIn } from "../../login/logIn";
-import { 
-    Box, 
-    Typography, 
-    Button, 
-    AppBar, 
-    Toolbar, 
-    Container, 
-    Grid, 
-    Paper, 
-    Avatar, 
+import {
+    Box,
+    Typography,
+    Button,
+    AppBar,
+    Toolbar,
+    Container,
+    Grid,
+    Paper,
+    Avatar,
     Divider,
     Card,
     CardContent,
@@ -36,7 +36,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import EventIcon from '@mui/icons-material/Event'; // הוספת הייבוא החסר
-
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const drawerWidth = 240;
 
@@ -91,9 +91,9 @@ export const EmpHome = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-    const navItems = ['יומן עבודה', 'רשימת לקוחות', 'התחברות'];
-    const navIcons = [<TodayIcon />, <PeopleIcon />, <LoginIcon />];
-    const navNavigate = [<CalendarEmp />, <Patients />, <LogIn />, ''];
+    const navItems = ['יומן עבודה', 'רשימת לקוחות', 'קביעת שעות עבודה', 'התחברות'];
+    const navIcons = [<TodayIcon />, <PeopleIcon />, <AccessTimeIcon />, <LoginIcon />];
+    const navNavigate = [<CalendarEmp />, <Patients />, '', <LogIn />, ''];
 
     const [show, setShow] = useState(0); // Default to calendar view
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -101,6 +101,11 @@ export const EmpHome = () => {
 
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
+    };
+    const handleSetWorkHours = () => {
+        console.log("Set work hours button clicked");
+        // כאן תוכל להוסיף לוגיקה לפתיחת דיאלוג או ניווט לעמוד קביעת שעות עבודה
+        // לדוגמה: setShowWorkHoursDialog(true);
     };
 
     // Mock data for dashboard

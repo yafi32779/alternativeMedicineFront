@@ -2,10 +2,11 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { EmpDay } from '../empDay/empDay';
 import { useEffect } from 'react';
 import { Box, Typography, Paper, Chip } from '@mui/material';
+import { getTurnByDateAndAvailableTurns } from '../../../redux/getData/getTurnByDateAndAvailableturns';
 
 // צבעים תואמים לאתר
 const colors = {
@@ -117,19 +118,33 @@ const MonthEmp = ({ currentDate, turns, treat }) => {
 
   const weekDayNames = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
   const fullWeekDayNames = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
-
+  const dataOfDate = useSelector(state => state.AvailebleTurnsAndTurnsSlice.availableTurnsAndTurns);
+  const currentEmployee = useSelector(state => state.employeeSlice.currentEmployee);
+ const dispatc = useDispatch();
   // וידוא שהדיאלוג נסגר כראוי בטעינה הראשונית
   useEffect(() => {
     setOpen(false);
   }, []);
 
-  const handleClickOpen = (date, day) => {
-    debugger;
-    setDateOfDay(date);
-    const dayOfWeek = date.getDay();
-    setNameOfDay(fullWeekDayNames[dayOfWeek]);
-    console.log("Opening dialog for date:", date, "Day name:", fullWeekDayNames[dayOfWeek]);
-    setOpen(true);
+const handleClickOpen = (date, day) => {
+    // setDateOfDay(date);
+    // const dayOfWeek = date.getDay();
+    // setNameOfDay(fullWeekDayNames[dayOfWeek]);
+    
+    // טען את הנתונים לפני פתיחת הדיאלוג
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day2 = String(date.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day2}`;
+    
+    let theEmpId = currentEmployee.id; // וודאי שזה מוגדר נכון
+    let length = 15;
+    
+    dispatc(getTurnByDateAndAvailableTurns({theEmpId, date: formattedDate, length}))
+        .then(() => {
+            // רק אחרי שהנתונים נטענו, פתח את הדיאלוג
+            setOpen(true);
+        });
 };
 
   const renderMonthDays = () => {
@@ -279,9 +294,6 @@ const MonthEmp = ({ currentDate, turns, treat }) => {
       {/* וידוא שכל הפרופס מועברים כראוי */}
       <EmpDay 
     dateOfDay={dateOfDay} 
-    // turns={turns.filter(turn => 
-    //     new Date(turn.date).toLocaleDateString() === dateOfDay.toLocaleDateString()
-    // )} 
     treat={treat} 
     open={open} 
     setOpen={setOpen} 

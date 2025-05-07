@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 
-export const LogIn = () => {
+export const LogIn = ({onClose}) => {
     const navigate = useNavigate()
     const patients = useSelector(state => state.patientSlice.listPatient);
     const employees = useSelector(state => state.employeeSlice.listEmployees);
@@ -29,12 +29,20 @@ export const LogIn = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const dispatch = useDispatch()
-
+let b;
     useEffect(() => {
         getPatient()
     }, [])
     
-    let b;
+    const handleBack = () => {
+        if (onClose) {
+            // אם הועבר פרופ onClose, השתמש בו (למקרה שהקומפוננטה מוצגת כדיאלוג)
+            onClose();
+        } else {
+            // אחרת, נסה לחזור לדף הקודם
+            navigate(-1);
+        }
+    };
     const getPatient = async () => {
         setLoading(true)
         try {
@@ -175,22 +183,23 @@ export const LogIn = () => {
                         </Button>
                         
                         <Button
-                            variant="outlined"
-                            onClick={() => navigate(-1)}
-                            sx={{
-                                color: '#4a7c59',
-                                borderColor: '#4a7c59',
-                                borderRadius: '30px',
-                                padding: '12px',
-                                fontSize: '1.1rem',
-                                '&:hover': {
-                                    borderColor: '#2c5530',
-                                    backgroundColor: 'rgba(74, 124, 89, 0.1)'
-                                }
-                            }}
-                        >
-                            חזרה
-                        </Button>
+            variant="outlined"
+            onClick={handleBack}
+            sx={{
+                color: '#4a7c59',
+                borderColor: '#4a7c59',
+                borderRadius: '30px',
+                padding: '12px',
+                fontSize: '1.1rem',
+                '&:hover': {
+                    borderColor: '#2c5530',
+                    backgroundColor: 'rgba(74, 124, 89, 0.1)'
+                }
+            }}
+        >
+            חזרה
+        </Button>
+   
                     </Box>
                 </Box>
             </Paper>
