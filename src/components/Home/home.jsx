@@ -850,7 +850,7 @@ export const NewHome = () => {
                             <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
                                 <LocationOnIcon sx={{ marginLeft: '10px', color: '#8fb996' }} />
                                 <Typography variant="body1">
-                                    רחוב הבריאות 10, תל אביב
+                                    רחוב גרוסמן 5, בית שמש
                                 </Typography>
                             </Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
