@@ -137,18 +137,18 @@ export const EmpDay = ({ dateOfDay, treat, open, setOpen, nameOfDay }) => {
     const [typeOfChoosenTreat, setTypeOfChoosenTreat] = useState();
 
     
-    useEffect(() => {
-        debugger
-        console.log("useEffect in EmpDay running", { dateOfDay });
-        let theEmpId = currentEmployee.id;
+    // useEffect(() => {
+    //     debugger
+    //     console.log("useEffect in EmpDay running", { dateOfDay });
+    //     let theEmpId = currentEmployee.id;
        
-        const year = dateOfDay.getFullYear();
-        const month = String(dateOfDay.getMonth() + 1).padStart(2, '0');
-        const day = String(dateOfDay.getDate()).padStart(2, '0');
-        const date = `${year}-${month}-${day}`;
-        let length = 15;
-        dispatch(getTurnByDateAndAvailableTurns({theEmpId, date, length}));
-    }, [dateOfDay]);
+    //     const year = dateOfDay.getFullYear();
+    //     const month = String(dateOfDay.getMonth() + 1).padStart(2, '0');
+    //     const day = String(dateOfDay.getDate()).padStart(2, '0');
+    //     const date = `${year}-${month}-${day}`;
+    //     let length = 15;
+    //     dispatch(getTurnByDateAndAvailableTurns({theEmpId, date, length}));
+    // }, [dateOfDay]);
 
     // useEffect(() => {
     //     debugger
@@ -174,6 +174,7 @@ export const EmpDay = ({ dateOfDay, treat, open, setOpen, nameOfDay }) => {
     }, [availableTurns]);
 
     useEffect(() => {
+        debugger
         if (dataOfDate.availableTurns) {
             dispatch(setAvailableTurnsBydate(dataOfDate.availableTurns));
             dispatch(setTurnsBydate(dataOfDate.turnsByDate));

@@ -37,12 +37,27 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 export const NewHome = () => {
     const navigate = useNavigate();
-    const navItems = ['דף הבית', 'הטיפולים שלנו', 'המטפלים', 'אודות', 'צור קשר'];
+    const navItems = ['דף הבית', 'הטיפולים שלנו', 'המלצות', 'אודות', 'צור קשר'];
     const [userName, setUserName] = useState('');
-    const navNavigate = ['/Home', '/treatments', '/therapists', '/About', '/Contact'];
+    const navNavigate = ['home', 'treatments', 'therapists', 'about', 'contact'];
     const user = useSelector(state => state.currentPatientSlice.currentPatient);
     const dispatch = useDispatch();
     const [show, setShow] = useState(-1);
+    const scrollToSection = (sectionId) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        } else if (sectionId === 'home') {
+            // אם זה כפתור "דף הבית", גלול לראש הדף
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    };
     // מידע על הטיפולים
     const treatments = [
         {
@@ -138,10 +153,11 @@ export const NewHome = () => {
         }
     ];
 
+
     return (
         <Box className="home-container" sx={{ direction: 'rtl', backgroundColor: '#f9f3e6' }}>
             {/* Header Banner */}
-            <Box sx={{
+            <Box id="home" sx={{
                 backgroundImage: 'linear-gradient(rgba(44, 85, 48, 0.7), rgba(44, 85, 48, 0.7)), url("/images/טיפול-טבעי-בחרדה_1732450075867-930x620.webp")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -164,7 +180,9 @@ export const NewHome = () => {
                     </Typography>
                     <Button
                         variant="contained"
-                        onClick={() => navigate('/Contact')}
+                        onClick={() => {
+                            navigate('/Contact')
+                            scrollToSection('contact')}}
                         sx={{
                             backgroundColor: '#d8c3a5',
                             color: '#2c5530',
@@ -200,7 +218,8 @@ export const NewHome = () => {
                         {navItems.map((item, index) => (
                             <Button
                                 key={index}
-                                onClick={() => navigate(navNavigate[index])}
+                                onClick={() => scrollToSection(navNavigate[index])}
+
                                 sx={{
                                     color: '#2c5530',
                                     fontWeight: 500,
@@ -237,19 +256,19 @@ export const NewHome = () => {
 
             {/* Welcome Section */}
 
-            <Container sx={{
-                padding: '80px 30px',                
+            <Container id="about" sx={{
+                padding: '80px 30px',
                 backgroundColor: '#f9f3e6'
             }}>
                 {show >= 0 ? (
                     <Box sx={{
-                        // position: 'fixed',
+                        position: 'fixed',
                         top: 0,
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        // backgroundColor: 'rgba(0, 0, 0, 0.7)',///////////
-                        zIndex: 1000,
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        zIndex: 1200,
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center'
@@ -260,7 +279,8 @@ export const NewHome = () => {
                             padding: '30px',
                             maxWidth: '500px',
                             width: '90%',
-                            position: 'relative'
+                            position: 'relative',
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)'
                         }}>
                             <Box
                                 onClick={() => setShow(-1)}
@@ -270,12 +290,13 @@ export const NewHome = () => {
                                     right: '15px',
                                     cursor: 'pointer',
                                     fontSize: '24px',
-                                    color: '#4a7c59'
+                                    color: '#4a7c59',
+                                    zIndex: 1
                                 }}
                             >
                                 ✕
                             </Box>
-                            {show === 0 && <LogIn />}
+                            {show === 0 && <LogIn onClose={() => setShow(-1)} />}
                             {/* אפשר להוסיף כאן עוד קומפוננטות בהתאם לערך של show */}
                         </Box>
                     </Box>
@@ -359,26 +380,28 @@ export const NewHome = () => {
                     </Typography>
                     <Button
                         variant="contained"
-                        onClick={() => navigate('/Contact')}
+                        onClick={() => scrollToSection('contact')}
                         sx={{
-                            backgroundColor: '#2c5530',
-                            color: 'white',
+                            backgroundColor: '#d8c3a5',
+                            color: '#2c5530',
                             borderRadius: '30px',
                             padding: '12px 30px',
                             fontSize: '1.1rem',
                             fontWeight: 'bold',
                             '&:hover': {
-                                backgroundColor: '#1e3c22'
+                                backgroundColor: '#a68a64',
+                                color: 'white'
                             }
                         }}
                     >
-                        צור קשר עכשיו
+                        צור קשר
                     </Button>
+
                 </Container>
             </Box>
 
             {/* Treatments Section */}
-            <Box sx={{
+            <Box id="treatments" sx={{
                 padding: '80px 30px',
                 backgroundColor: '#f5efe0'
             }}>
@@ -487,7 +510,7 @@ export const NewHome = () => {
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={6} md={4}>
-                            <Box sx={{
+                            <Box sx={{///////////////
                                 padding: '30px',
                                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
                                 borderRadius: '10px'
@@ -523,9 +546,9 @@ export const NewHome = () => {
             </Box>
 
             {/* Testimonials Section */}
-            <Box sx={{
+            <Box id="therapists" sx={{
                 //backgroundColor: '#8fb996',
-                backgroundColor:'#d8c3a5' ,
+                backgroundColor: '#d8c3a5',
                 padding: '80px 30px'
             }}>
                 <Container>
@@ -645,7 +668,7 @@ export const NewHome = () => {
             </Container>
 
             {/* Contact CTA Section */}
-            <Box sx={{
+            <Box id="contact" sx={{
                 backgroundImage: 'linear-gradient(rgba(44, 85, 48, 0.9), rgba(44, 85, 48, 0.9)), url("https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
@@ -665,8 +688,8 @@ export const NewHome = () => {
                     <Box sx={{
                         maxWidth: '600px',
                         margin: '0 auto',
-                       backgroundColor: '#f9f3e6',
-                       //backgroundColor: '#8fb996',
+                        backgroundColor: '#f9f3e6',
+                        //backgroundColor: '#8fb996',
                         padding: '40px',
                         borderRadius: '10px',
                         boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)'
