@@ -869,7 +869,7 @@ export const NewHome = () => {
                                 <AccessTimeIcon sx={{ marginLeft: '10px', color: '#8fb996' }} />
                                 <Box>
                                     <Typography variant="body1">
-                                        ימים א'-ה': 09:00-20:00
+                                        ימים א'-ה': 09:00-16:00
                                     </Typography>
                                     <Typography variant="body1">
                                         יום ו': 09:00-14:00
