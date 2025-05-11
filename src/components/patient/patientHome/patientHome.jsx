@@ -1,19 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import './patientHome.css';
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { SingIn } from "../singIn/singIn";
 import { AvailableTurns } from "../availableTurns/availableTurns";
 import { LogIn } from "../../login/logIn";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography, Button, Card, CardContent, CardMedia, Container, Grid, AppBar, Toolbar } from '@mui/material';
+import { FutureAppointments } from "../futureTurns/futureTurns";
+import { getAllTurnsThunk } from "../../../redux/turnsSlice/getAllTturnsthunk";
+
 
 export const PatientHome = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+        const allTurns = useSelector(state => state.turnsSlice.allTurns);
+
     const navItems = ['התחברות', 'תורים עתידיים', 'היסטורית תורים', 'קביעת תורים'];
-    const navNavigate = [<LogIn />, '/future-appointments', '/appointment-history', <AvailableTurns />];
+    const navNavigate = [<LogIn />, <FutureAppointments allTurns={allTurns}/>, '/appointment-history', <AvailableTurns />];
+
     const [show, setShow] = useState(-1);
     const user = useSelector(state => state.currentPatientSlice.currentPatient);
-    
     const treatments = [
         { name: 'רפלקסולוגיה', description: 'טיפול המשלב עיסוי כפות הרגליים לאיזון הגוף', image: '/images/טיפול-טבעי-בחרדה_1732450075867-930x620.webp' },
         { name: 'אבחון ביקום', description: 'אבחון מתקדם באמצעות מכשיר ביקום', image: '/images/טיפול-טבעי-בחרדה_1732450075867-930x620.webp' },
@@ -22,6 +28,13 @@ export const PatientHome = () => {
         { name: 'טיפול באוזון', description: 'טיפול מתקדם לחיזוק המערכת החיסונית', image: '/images/טיפול-טבעי-בחרדה_1732450075867-930x620.webp' },
         { name: 'דיאטת ניקוי', description: 'תוכנית תזונה ייחודית לניקוי הגוף', image: '/images/טיפול-טבעי-בחרדה_1732450075867-930x620.webp' }
     ];
+
+    useEffect(() => {
+        getAllTurns();
+    },[])
+    const getAllTurns = async () => {
+        await dispatch(getAllTurnsThunk());
+    }
 
     return (
         <Box className="patient-home">
@@ -48,25 +61,25 @@ export const PatientHome = () => {
             </Box>
 
             {/* Navigation Toolbar */}
-            <AppBar position="static" sx={{ 
-                backgroundColor: '#d8c3a5', 
+            <AppBar position="static" sx={{
+                backgroundColor: '#d8c3a5',
                 boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)'
             }}>
-                <Toolbar sx={{ 
-                    display: 'flex', 
+                <Toolbar sx={{
+                    display: 'flex',
                     justifyContent: 'space-between',
                     padding: '10px 30px'
                 }}>
-                    {user.firstName && 
+                    {user.firstName &&
                         <Typography variant="h6" sx={{ color: '#2c5530', fontWeight: 500 }}>
                             שלום {user.firstName} {user.lastName}
                         </Typography>
                     }
                     <Box sx={{ display: 'flex', gap: '25px' }}>
                         {navItems.map((item, index) => (
-                            <Button 
+                            <Button
                                 key={index}
-                                onClick={() => setShow(index)} 
+                                onClick={() => setShow(index)}
                                 sx={{
                                     color: show === index ? 'white' : '#2c5530',
                                     backgroundColor: show === index ? '#4a7c59' : 'transparent',
@@ -102,11 +115,11 @@ export const PatientHome = () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <Box 
+                                <Box
                                     component="img"
                                     src='/images/טיפול-טבעי-בחרדה_1732450075867-930x620.webp'
                                     alt="הקליניקה שלנו"
-                                    sx={{ 
+                                    sx={{
                                         width: '100%',
                                         borderRadius: '10px',
                                         boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)'
@@ -117,7 +130,7 @@ export const PatientHome = () => {
                     </Container>
 
                     {/* Treatments Section */}
-                    <Box sx={{ 
+                    <Box sx={{
                         backgroundColor: '#8fb996',
                         padding: '60px 30px',
                         textAlign: 'center'
@@ -129,7 +142,7 @@ export const PatientHome = () => {
                             <Grid container spacing={3}>
                                 {treatments.map((treatment, index) => (
                                     <Grid item xs={12} sm={6} md={4} key={index}>
-                                        <Card sx={{ 
+                                        <Card sx={{
                                             height: '100%',
                                             display: 'flex',
                                             flexDirection: 'column',
@@ -156,8 +169,8 @@ export const PatientHome = () => {
                                                 <Typography variant="body1" sx={{ marginBottom: '20px' }}>
                                                     {treatment.description}
                                                 </Typography>
-                                                <Button 
-                                                    variant="contained" 
+                                                <Button
+                                                    variant="contained"
                                                     onClick={() => setShow(3)}
                                                     sx={{
                                                         backgroundColor: '#4a7c59',
@@ -179,7 +192,7 @@ export const PatientHome = () => {
                     </Box>
 
                     {/* Benefits Section */}
-               
+
                 </>
             ) : (
                 <Container sx={{ minHeight: '500px', padding: '40px 0' }}>
@@ -188,7 +201,7 @@ export const PatientHome = () => {
             )}
 
             {/* Footer */}
-            <Box sx={{ 
+            <Box sx={{
                 backgroundColor: '#2c5530',
                 color: 'white',
                 padding: '40px 30px 20px'
@@ -210,7 +223,7 @@ export const PatientHome = () => {
                             <Typography variant="body1">יום ו': 09:00-14:00</Typography>
                         </Grid>
                     </Grid>
-                    <Box sx={{ 
+                    <Box sx={{
                         textAlign: 'center',
                         marginTop: '40px',
                         paddingTop: '20px',
