@@ -1,0 +1,10 @@
+.future-appointments {
+    padding: 30px 0;
+    direction: rtl;
+}
+
+@media (max-width: 600px) {
+    .future-appointments {
+        padding: 20px 0;
+    }
+}
